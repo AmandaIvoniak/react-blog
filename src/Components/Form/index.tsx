@@ -64,27 +64,27 @@ export function Form({ data, id, modal, clean }: FormProps) {
     }, [])
 
     return (
-        <S.Form onSubmit={handleSubmit((idComment == null || idAnswer != null) ? saveComment : changeComment)}>
-            <div className="inputs">
-                <div>
-                    <Input
-                        withLabel
-                        label="Name"
-                        {...register("user", { required: true })}
-                    />
-                    {errors.user && <span className="error">Name is required</span>}
-                </div>
-                <div>
-                    <Input
-                        withLabel
-                        label="Comment"
-                        {...register("content", { required: true })}
-                    />
-                    {errors.content && <span className="error">Comment is required</span>}
-                </div>
-            </div>
+        <S.Form onSubmit={
+            handleSubmit(data.action === "Update" ? changeComment : saveComment)
+        }>
+            <Input
+                withLabel
+                label="Name"
+                error={errors.user}
+                errorMessage={"Name is required"}
+                {...register("user", { required: true })}
+            />
+            <Input
+                withLabel
+                label="Comment"
+                error={errors.content}
+                errorMessage={"Name is required"}
+                {...register("content", { required: true })}
+            />
             <div className="buttons">
-                <button type="button" onClick={() => modal()}>Cancel</button>
+                <button type="button" onClick={() => { clean(); modal(); }}>
+                    Cancel
+                </button>
                 <button type="submit">Save</button>
             </div>
         </S.Form>

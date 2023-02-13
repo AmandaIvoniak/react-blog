@@ -8,9 +8,6 @@ export function Blog() {
     try {
       const { data } = await api
         .get(`/posts/${idPost}`);
-      // .catch((error) => {
-      //   // setErrorMessage(error?.response?.data);
-      // });
       return await data;
     } catch (err) {
       return [];
@@ -37,8 +34,6 @@ export function Blog() {
   }
 
   async function addComment(addComment: any) {
-    console.log(addComment);
-    
     try {
       await api
         .post(`/posts/${addComment.postId}/comments`, addComment);

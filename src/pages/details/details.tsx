@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as S from "./styled";
-import { Container } from "../../Sections/Container";
+import { Container } from "../../Components/Sections/Container";
 import { Blog } from "./provider";
 import { ModeEdit } from '@mui/icons-material';
 import { Form } from "../../Components/Form";
@@ -11,7 +11,7 @@ export const Details = () => {
     const [id] = useState(Number(useParams().id));
     const [post, setPost] = useState<any>();
     const [commentsItens, setCommentsItens] = useState<any>();
-    const [infos, setInfos] = useState<any>();
+    const [infos, setInfos] = useState<any>({ action: "", info: null });
     const [modal, setModal] = useState(false);
 
     const { posts, comments, getPosts, getComments } = Blog();
@@ -29,18 +29,18 @@ export const Details = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [post === undefined, commentsItens === undefined]);
 
-    const goToTop = () => {
-        window.scrollTo({
-            top: 0,
-        });
-    };
-
     useEffect(() => {
         setPost(posts);
-        const filterComments = comments.filter((item: any) => item.parent_id === null);
-        const filterAnswer = comments.filter((item: any) => item.parent_id !== null);
+        const filterComments = comments.filter((item: any) =>
+            item.parent_id === null
+        );
+        const filterAnswer = comments.filter((item: any) =>
+            item.parent_id !== null
+        );
         filterComments.map((item: any) => {
-            return item.answer = filterAnswer.filter((answer: any) => answer.parent_id === item.id)
+            return item.answer = filterAnswer.filter((answer: any) =>
+                answer.parent_id === item.id
+            )
         })
         setCommentsItens(filterComments.reverse());
 
@@ -51,7 +51,7 @@ export const Details = () => {
             <S.Content>
                 <div className="comments">
                     <h3>{post?.title}</h3>
-                    <p dangerouslySetInnerHTML={{ __html: post?.content }} ></p>
+                    <p dangerouslySetInnerHTML={{ __html: post?.content }} />
                     <div className="author">
                         <span><b>Author: </b>{post?.author}</span>
                         <span><b>Date: </b>{post?.publish_date}</span>
@@ -67,11 +67,17 @@ export const Details = () => {
 
                             </div>
                             <div className="buttons">
-                                <button type="button" onClick={() => { setModal(true); setInfos({ action: "Update", info: item }); goToTop(); }}>
+                                <button type="button" onClick={() => {
+                                    setModal(true);
+                                    setInfos({ action: "Update", info: item });
+                                }}>
                                     <ModeEdit />
                                     Update
                                 </button>
-                                <span onClick={() => { setModal(true); setInfos({ action: "Answer", info: item.id }); goToTop(); }}>
+                                <span onClick={() => {
+                                    setModal(true);
+                                    setInfos({ action: "Answer", info: item.id });
+                                }}>
                                     Answer
                                 </span>
                             </div>
@@ -84,11 +90,20 @@ export const Details = () => {
                         ))}
                     </S.Comment>
                 ))}
-                <button className="commentButton" onClick={() => { setModal(true); setInfos({ action: "Add", info: null }); goToTop(); }}>Comentar!</button>
+                <button className="commentButton" onClick={() => {
+                    setModal(true);
+                    setInfos({ action: "Add", info: null });
+                }}>Comentar!</button>
 
-                <Modal name={"Modal"} isOpen={modal} children={
-                    <Form data={infos} id={id} modal={() => setModal(false)} clean={() => setCommentsItens(undefined)} />
-                } divider={16} onClose={() => setModal(false)} />
+                <Modal isOpen={modal}>
+                    {infos.action !== "" &&
+                        <Form data={infos} id={id}
+                        modal={() => setModal(false)}
+                        clean={() => {
+                            setCommentsItens(undefined);
+                            setInfos({ action: "", info: null });
+                        }} />}
+                </Modal>
             </S.Content>
         </Container>
     );

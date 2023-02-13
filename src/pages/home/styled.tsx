@@ -1,35 +1,24 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
-	columns: 18rem;
-	gap: 1rem;
-	counter-reset: grid;
-
-  .item + .item {
-	  margin-top: 1rem;
-  }
-
-  .item {
-    break-inside: avoid;
-    aspect-ratio: 4 / 3;
-    padding: 1rem;
-    border-radius: 0.75rem;
-  }
-
-  .item:nth-child(3n) {
-    aspect-ratio: 1;
-  }
-
-  .item:nth-child(3n - 1) {
-    aspect-ratio: 6/7;
-  }
+  display: grid;
+  flex-flow: wrap;
+  justify-content: center;
+  margin:0 10px;
+  grid-template-columns: auto auto auto;
+  gap: 18px;
 
   .item {
     background-color: #f8faff;
     padding:10px;
     border-radius:8px;
     text-align: center;
+    width: 350px;
     cursor: pointer;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 1px 1px 5px rgb(0 0 0 / 16%);
 
     h3{
       font-size:18px;
@@ -45,7 +34,7 @@ export const Content = styled.div`
       color:#156581 !important;
     }
 
-    div{
+    .footerCard{
       display: flex;
       place-content: space-between;
       align-items: flex-end;

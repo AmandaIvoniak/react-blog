@@ -4,6 +4,7 @@ export const BoxField = styled.div`
   margin: 0px;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom:10px;
 
   input:focus {
     border: 1px solid #41778a !important;

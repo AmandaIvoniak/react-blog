@@ -3,7 +3,7 @@ import { BoxField, InputField, Label, ErrorMessage } from "./styles";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   autoComplete?: string;
-  error?: boolean;
+  error?: any;
   errorMessage?: any;
   label?: string;
   withLabel?: boolean;

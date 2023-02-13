@@ -7,7 +7,7 @@ export const Content = styled.div`
   padding: 18px;
   background-color: #f2f6fa;
   border-radius: 12px;
-
+  box-shadow: 1px 1px 5px rgb(0 0 0 / 16%);
   .comments{
     border-radius: 8px;
     margin-bottom: 10px;
@@ -58,16 +58,18 @@ export const Comment = styled.div<CommentProps>`
     place-content: space-between;
     ${props => props.item === true ? 
     `border-bottom:1px solid #CAD0D5;` 
-    : ``}
+  : ``}
+    padding-bottom:10px;
   }
 
   h4{
     margin-right:10px;
+    margin-top: 5px;
+
     margin-bottom:0px;
   }
   p{
     margin-top: 5px;
-    margin-left:20px;
   }
 
   .buttons{
@@ -98,11 +100,12 @@ export const Comment = styled.div<CommentProps>`
       background: #568EAF;
       border-radius: 4px;
       color:#FFFFFF;
+      
     }
   }
 
   .answer{
-    margin: 14px 40px 20px;
+    margin: 14px 20px 20px;
     font-style: italic;
     h4{
       color: #787878;
