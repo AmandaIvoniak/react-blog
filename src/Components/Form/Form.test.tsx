@@ -27,7 +27,7 @@ test('Required inputs', async () => {
 
   fireEvent.click(screen.getByText('Save'));
   
-  expect(await screen.findByText("Name is required")).toBeVisible()
-  expect(await screen.findByText("Comment is required")).toBeVisible()
+  expect(await screen.findByText("Name is required")).toBeVisible();
+  expect(await screen.findByText("Comment is required")).toBeVisible();
 })
 

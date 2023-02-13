@@ -78,7 +78,7 @@ export function Form({ data, id, modal, clean }: FormProps) {
                 withLabel
                 label="Comment"
                 error={errors.content}
-                errorMessage={"Name is required"}
+                errorMessage={"Comment is required"}
                 {...register("content", { required: true })}
             />
             <div className="buttons">
